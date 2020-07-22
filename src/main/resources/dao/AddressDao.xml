@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.AddressDao">
+
+    <resultMap id="AddressResultMap" type="com.qf.dto.AddressDto">
+        <result column="addressee" property="addressee"/>
+        <result column="add_phone" property="addPhone"/>
+        <result column="area" property="area"/>
+        <result column="street" property="street"/>
+     </resultMap>
+
+    <!-- 显示地址 -->
+    <select id="showAddress" resultMap="AddressResultMap">
+        select addressee,add_phone,area,street from address
+    </select>
+
+    <insert id="insertAddress">
+        insert into address(addressee,add_phone,area,street) values(#{addressee},#{addPhone},#{area},#{street});
+    </insert>
+
+    <!-- 根据地址编号修改地址 -->
+    <update id="updateAddress">
+        update address set addressee = #{addressee},add_phone = #{addPhone},area = #{area},street = #{street} where address_id = #{addressId}
+    </update>
+
+    <delete id="deleteAddress">
+        delete from address where address_id = #{addressId}
+    </delete>
+
+</mapper>
