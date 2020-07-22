@@ -135,6 +135,7 @@ public class UserServiceImpl implements UserService {
 
 
 
+
     @Override
     public R loginOut(String token) {
         if (jedisCore.checkKey(RedisKeyConfig.TOKEN_USER+token)){
