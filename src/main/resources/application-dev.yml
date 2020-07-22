@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:mysql://182.92.77.178:3306/phonestore?serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath*:dao/*.xml
+
+#自定义属性配置
+brandshop:
+  redis:
+    host: 182.92.77.178
+    port: 6379
+    pass: 123456
+  aes:
+    passkey: DsFxTKHDkEaFznQVp3Rtbg==

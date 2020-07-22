@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.UserDao">
+    <resultMap id="UserResultMap" type="com.qf.pojo.User">
+        <id column="user_id" property="userId"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_pass" property="userPass"/>
+        <result column="flag" property="flag"/>
+     </resultMap>
+
+    <insert id="Register">
+        insert into user(user_name,user_phone,user_pass,flag) values(#{userName},#{userPhone},#{userPass},1);
+    </insert>
+
+    <!-- 校验手机号 -->
+    <select id="selectUserByPhone" resultMap="UserResultMap">
+        select user_id,user_name,user_phone,user_pass,flag from user where user_phone=#{phone}
+    </select>
+    <!-- 根据用户ID修改密码 -->
+    <update id="UpdateUserPass">
+        update user set user_pass = #{userPass} where user_id = #{userId}
+    </update>
+
+    <!-- 根据手机号修改密码 -->
+    <update id="findPass">
+        update user set user_pass = #{userPass} where user_phone = #{userPhone}
+    </update>
+</mapper>
