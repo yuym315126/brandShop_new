@@ -16,5 +16,9 @@ public interface ProductInfoDao {
     List<ProductInfo> findByHot();
     //季末清仓()
     List<ProductInfo> findByLowerOfMonth();
+    //根据厂家地址id查询
+    List<ProductInfo> findByFactoryAddressId(Integer factoryAddressId);
+    //根据商品类型查询
+    List<ProductInfo> findByGoodsType(Integer goodsTypeId);
 
 }

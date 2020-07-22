@@ -31,4 +31,14 @@ public class ProductInfo {
     private Integer factoryAddressId;
     //
     private FactoryAddress factoryAddress;
+    //面料
+    private String material;
+    //尺码
+    private Integer size;
+    //长度偏差
+    private String length;
+    //薄厚质数
+    private String thickness;
+    //弹性指数
+    private String elasticity;
 }

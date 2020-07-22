@@ -64,4 +64,17 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
         return R.ok(byLowerOfMonth);
     }
+
+    @Override
+    public R findByFactoryAddressId(Integer factoryAddressId) {
+        List<ProductInfo> byFactoryAddressId = productInfoDao.findByFactoryAddressId(factoryAddressId);
+
+        return R.ok(byFactoryAddressId);
+    }
+
+    @Override
+    public R findByGoodsType(Integer goodsTypeId) {
+        List<ProductInfo> byGoodsType = productInfoDao.findByGoodsType(goodsTypeId);
+        return R.ok(byGoodsType);
+    }
 }

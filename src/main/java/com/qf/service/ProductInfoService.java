@@ -16,4 +16,9 @@ public interface ProductInfoService {
     R findByHot();
     //季末清仓()
     R findByLowerOfMonth();
+    //根据厂家地址id查询
+    R findByFactoryAddressId(Integer factoryAddressId);
+    //根据商品类型查询
+    R findByGoodsType(Integer goodsTypeId);
+
 }

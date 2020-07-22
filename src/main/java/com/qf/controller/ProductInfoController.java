@@ -35,10 +35,15 @@ public class ProductInfoController {
     public R findByProductLike(String findCondition){
         return productInfoService.findByProductLike(findCondition);
     }
-    @ApiOperation("根据商品id查询")
+    @ApiOperation("根据商品id查询商品详情")
     @PostMapping("api/product/findGoodById")
     public R findGoodById(Integer productId){
         return productInfoService.findGoodById(productId);
+    }
+    @ApiOperation("根据厂家地址id查询")
+    @PostMapping("api/product/findGoodByFactoryAddressId")
+    public R findGoodByFactoryAddressId(Integer factoryAddressId){
+        return productInfoService.findByFactoryAddressId(factoryAddressId);
     }
 
 
