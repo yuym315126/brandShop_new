@@ -11,11 +11,13 @@ import com.qf.vo.R;
  * @DATE: 2020/7/21 19:44
  */
 public interface AddressService {
-    R showAddress();
+    R showAddress(int userId);
 
     R insertAddress(AddressDto addressDto);
 
-    R updateAddress(int addressId);
+    R updateAddress(Address address);
 
     R deleteAddress(int addressId);
+
+
 }

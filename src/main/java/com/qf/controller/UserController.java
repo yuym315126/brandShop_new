@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Api(tags = "用户相关操作")
 @RestController
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;

@@ -10,6 +10,8 @@ public class ShoppingCart {
     private Integer count;
     private Double price;
     private Integer userId;
-    private Integer goodId;
+//    private Integer goodId;
+    private String productName;
+    private String productImg;
 
 }

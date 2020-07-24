@@ -33,6 +33,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     @Override
     public R findByProductLike(String findCondition) {
         List<ProductInfo> byProductLike = productInfoDao.findByProductLike(findCondition);
+
+
         String token = TokenUtil.createProductToken(123456);
         jedisCore.set(RedisKeyConfig.TOKEN_USER+token, JSON.toJSONString(byProductLike),RedisKeyConfig.TOKEN_TIME);
 //        return R.ok(token);

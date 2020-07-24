@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.OrderDao">
+    <resultMap id="UserResultMap" type="com.qf.pojo.Order">
+        <id column="order_id" property="orderId"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="user_id" property="userId"/>
+<!--        <result column="order_items_id" property="orderItemId"/>-->
+     </resultMap>
+
+        <select id="selectAllOrders" resultType="com.qf.pojo.Order" resultMap="UserResultMap">
+            select order_id,order_num,order_status,total_price,user_id from t_order
+                where user_id=#{userId}
+        </select>
+        <!-- 新增订单 -->
+        <insert id="addOrder">
+            insert into t_order(order_num,order_status,total_price,user_id)
+            values(#{orderNum},#{orderStatus},#{totalPrice},#{userId})
+        </insert>
+        <!-- 查询单个订单 -->
+        <select id="selectOrder" resultMap="UserResultMap">
+            select order_num,total_price from t_order where order_id = #{orderId}
+        </select>
+</mapper>

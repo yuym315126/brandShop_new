@@ -15,14 +15,18 @@ import java.util.List;
 @Repository
 public interface AddressDao {
     //显示地址
-    List<Address> showAddress();
+    List<Address> showAddress(int userId);
 
     //添加地址
     Integer insertAddress(AddressDto address);
 
     //修改地址
-    Integer updateAddress(int addressId);
+    Integer updateAddress(Address address);
+    //Integer updateAddress(Integer addressId);
 
     //删除地址
     Integer deleteAddress(int addressId);
+
+    //根据id查询地址
+    Address selectAddressById(Integer addressId);
 }

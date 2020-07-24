@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.OrderItemDao">
+    <resultMap id="UserResultMap" type="com.qf.pojo.OrderItems">
+        <id column="items_id" property="itemsId"/>
+        <result column="items_num" property="itemsNum"/>
+        <result column="product_id" property="productId"/>
+<!--        <result column="order_id" property="orderId"/>-->
+        <result column="user_id" property="userId"/>
+        <result column="address_id" property="addressId"/>
+     </resultMap>
+     <select id="findOrderItems" resultMap="UserResultMap">
+        select items_id,items_num,product_id,user_id,address_id
+        from order_items where items_id = #{orderItemId};
+    </select>
+
+    <insert id="addOrderItem">
+        insert into order_items(items_num,user_id,product_id,address_id)
+        value (#{itemsNum},#{userId},#{productId},#{addressId})
+    </insert>
+
+
+</mapper>

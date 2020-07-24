@@ -22,8 +22,8 @@ public class AddressServiceImpl implements AddressService {
     private AddressDao addressDao;
 
     @Override
-    public R showAddress() {
-        List<Address> addresses = addressDao.showAddress();
+    public R showAddress(int userId) {
+        List<Address> addresses = addressDao.showAddress(userId);
         if (addresses != null){
             return R.ok(addresses);
         }
@@ -40,8 +40,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public R updateAddress(int addressId) {
-        Integer integer = addressDao.updateAddress(addressId);
+    public R updateAddress(Address address) {
+        Integer integer = addressDao.updateAddress(address);
         if (integer == 1){
             return R.ok();
         }

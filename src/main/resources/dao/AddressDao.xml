@@ -8,15 +8,25 @@
         <result column="add_phone" property="addPhone"/>
         <result column="area" property="area"/>
         <result column="street" property="street"/>
+        <result column="user_id" property="userId"/>
      </resultMap>
+
+    <resultMap id="base" type="com.qf.pojo.Address">
+        <id column="address_id" property="addressId"/>
+        <result column="addressee" property="addressee"/>
+        <result column="add_phone" property="addPhone"/>
+        <result column="area" property="area"/>
+        <result column="street" property="street"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
 
     <!-- 显示地址 -->
     <select id="showAddress" resultMap="AddressResultMap">
-        select addressee,add_phone,area,street from address
+        select addressee,add_phone,area,street from address where user_id=#{userId}
     </select>
 
     <insert id="insertAddress">
-        insert into address(addressee,add_phone,area,street) values(#{addressee},#{addPhone},#{area},#{street});
+        insert into address(addressee,add_phone,area,street,user_id) values(#{addressee},#{addPhone},#{area},#{street},#{userId});
     </insert>
 
     <!-- 根据地址编号修改地址 -->
@@ -27,5 +37,9 @@
     <delete id="deleteAddress">
         delete from address where address_id = #{addressId}
     </delete>
+    <!--根据id查询地址-->
+    <select id="selectAddressById" resultType="com.qf.pojo.Address" resultMap="base">
+        select addressee,add_phone,area,street from address where address_id = #{addressId}
+    </select>
 
 </mapper>

@@ -1,11 +1,13 @@
 package com.qf.controller;
 
 import com.qf.dto.AddressDto;
+import com.qf.pojo.Address;
 import com.qf.service.AddressService;
 import com.qf.vo.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,15 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "地址相关操作")
 @RestController
+@CrossOrigin
 public class AddressController {
     @Autowired
     private AddressService addressService;
 
     @ApiOperation("显示地址")
     @GetMapping("api/address/showAddress")
-    public R showAddress(){
-        R r = addressService.showAddress();
-        System.out.println(r);
+    public R showAddress(int userId){
+        R r = addressService.showAddress(userId);
+//        System.out.println(r);
         return r;
 
     }
@@ -38,8 +41,8 @@ public class AddressController {
 
     @ApiOperation("更新地址")
     @GetMapping("api/address/updateAddress")
-    public R updateAddress(int addressId){
-        return addressService.updateAddress(addressId);
+    public R updateAddress(Address address){
+        return addressService.updateAddress(address);
     }
 
     @ApiOperation("删除地址")
