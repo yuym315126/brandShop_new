@@ -18,7 +18,7 @@ public class ProductInfoController {
     @Autowired
     private ProductInfoService productInfoService;
     @ApiOperation("查询所有商品")
-    @PostMapping("api/product/findAllProducts")
+    @GetMapping("api/product/findAllProducts")
     public R findAllProducts(){
         return productInfoService.findAllGoods();
     }
