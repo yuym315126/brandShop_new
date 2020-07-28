@@ -8,9 +8,7 @@ import com.qf.vo.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,16 +39,29 @@ public class AddressController {
 
     }
     @ApiOperation("添加地址")
-    @GetMapping("api/address/insertAddress")
-    public R insertAddress(AddressDto addressDto){
-
-        return addressService.insertAddress(addressDto);
+    @PostMapping("api/address/insertAddress")
+    public R insertAddress(@RequestBody AddressDto addressDto, HttpServletRequest request){
+        String token = request.getHeader(SystemConstant.TOKEN_HEADER);
+        return addressService.insertAddress(addressDto,token);
     }
 
+//    @ApiOperation("更新地址")
+//    @GetMapping("api/address/updateAddress")
+//    public R updateAddress(Address address){
+//        return addressService.updateAddress(address);
+//    }
+
+
     @ApiOperation("更新地址")
-    @GetMapping("api/address/updateAddress")
-    public R updateAddress(Address address){
-        return addressService.updateAddress(address);
+    @PostMapping("api/address/updateAddress/{addressId}")
+    public R updateAddress(@PathVariable Integer addressId ,@RequestBody AddressDto addressDto){
+        return addressService.updateAddress(addressId,addressDto);
+    }
+
+    @ApiOperation("地址详情")
+    @GetMapping("api/address/showOneAddress/{addressId}")
+    public R showOneAddress(@PathVariable Integer addressId){
+        return addressService.findAddressById(addressId);
     }
 
     @ApiOperation("删除地址")

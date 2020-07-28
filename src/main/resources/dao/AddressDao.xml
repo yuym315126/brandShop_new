@@ -18,7 +18,6 @@
     <select id="showAddress" resultMap="base">
         select address_id,addressee,add_phone,area,street from address where user_id=#{userId}
     </select>
-
     <insert id="insertAddress">
         insert into address(addressee,add_phone,area,street,user_id) values(#{addressee},#{addPhone},#{area},#{street},#{userId});
     </insert>
@@ -35,5 +34,6 @@
     <select id="selectAddressById" resultType="com.qf.pojo.Address" resultMap="base">
         select addressee,add_phone,area,street from address where address_id = #{addressId}
     </select>
+
 
 </mapper>

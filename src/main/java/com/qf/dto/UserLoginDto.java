@@ -10,6 +10,6 @@ import lombok.Data;
  */
 @Data
 public class UserLoginDto {
-    private String UserPhone;
-    private String UserPass;
+    private String userPhone;
+    private String userPass;
 }

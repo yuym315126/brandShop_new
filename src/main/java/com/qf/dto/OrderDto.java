@@ -10,7 +10,10 @@ import lombok.Data;
  */
 @Data
 public class OrderDto {
-//    private String orderNum;
-    private String OrderStatus;
-    private Double totalPrice;
+    private String addressee;
+    private String addPhone;
+    private String area;
+    private String street;
+//    private Integer userId;
+
 }

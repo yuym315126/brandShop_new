@@ -55,4 +55,11 @@ public class UserController {
     public R loginOut(HttpServletRequest request){
         return userService.loginOut(request.getHeader(SystemConstant.TOKEN_HEADER));
     }
+
+    @ApiOperation("用户详情")
+    @PostMapping("api/user/findUser")
+    public R findUser(HttpServletRequest request){
+        String token = request.getHeader(SystemConstant.TOKEN_HEADER);
+        return userService.findUser(token);
+    }
 }

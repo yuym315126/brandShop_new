@@ -19,5 +19,7 @@ public interface UserDao {
 //    @Select("select user_id, user_name,user_phone,user_pass")
 //    Integer login(UserDto userDto);
 
+    //根据id查询单个用户
+    User findUserById(Integer userId);
 
 }

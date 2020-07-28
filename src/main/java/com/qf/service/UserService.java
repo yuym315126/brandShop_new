@@ -24,5 +24,8 @@ public interface UserService {
     //退出登录
     R loginOut(String token);
 
+    //根据id查询单个用户
+    R findUser(String token);
+
 
 }

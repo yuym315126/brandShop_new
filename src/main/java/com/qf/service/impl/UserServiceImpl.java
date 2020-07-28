@@ -70,12 +70,13 @@ public class UserServiceImpl implements UserService {
         }else{
             //根据手机号先判断用户是否存在
             User user = userDao.selectUserByPhone(userPhone);
-            System.out.println(user.toString());
-            System.out.println(user.getUserPass());
+
 //            boolean iserror = true;
             if (user!=null){
+//                System.out.println(user.toString());
+//                System.out.println(user.getUserPass());
                 //用户存在 校验密码
-                System.out.println(EncryptUtil.aesdec(key,user.getUserPass()));
+//                System.out.println(EncryptUtil.aesdec(key,user.getUserPass()));
                 //userLoginDto.getUserPass().equals(EncryptUtil.aesdec(key,user.getUserPass()))
                 if (EncryptUtil.aesdec(key,user.getUserPass()).equals(userLoginDto.getUserPass())){
                     //成功 生成令牌
@@ -121,7 +122,7 @@ public class UserServiceImpl implements UserService {
     //找回密码
     @Override
     public R findPass(UserLoginDto userLoginDto) {
-       String phone = userLoginDto.getUserPhone();
+        String phone = userLoginDto.getUserPhone();
         User user = userDao.selectUserByPhone(phone);
         if (user != null && !"".equals(user)){
             if (userDao.findPass(phone,EncryptUtil.aesenc(key,userLoginDto.getUserPass()))>0){
@@ -146,6 +147,16 @@ public class UserServiceImpl implements UserService {
             return R.ok();
         }
         return R.error("请传递令牌");
+    }
+
+    @Override
+    public R findUser(String token) {
+        if (jedisCore.checkKey(RedisKeyConfig.TOKEN_USER+token)){
+            User user = JSON.parseObject(jedisCore.get(RedisKeyConfig.TOKEN_USER+token),User.class);
+            User userById = userDao.findUserById(user.getUserId());
+            return R.ok(userById);
+        }
+        return R.error("亲，登录已失效，请先登录");
     }
 
 

@@ -18,7 +18,7 @@ public interface AddressDao {
     List<Address> showAddress(int userId);
 
     //添加地址
-    Integer insertAddress(AddressDto address);
+    Integer insertAddress(Address address);
 
     //修改地址
     Integer updateAddress(Address address);
