@@ -54,6 +54,7 @@ public class ProductInfoController {
 
         }
     }
+
     @ApiOperation("根据商品类型id查询")
     @GetMapping("api/product/findGoodByTypeId")
     public R findGoodByTypeId(Integer typeId){
