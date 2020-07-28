@@ -11,7 +11,7 @@ import com.qf.vo.R;
  * @DATE: 2020/7/21 19:44
  */
 public interface AddressService {
-    R showAddress(int userId);
+    R showAddress(String token);
 
     R insertAddress(AddressDto addressDto);
 

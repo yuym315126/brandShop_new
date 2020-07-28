@@ -90,10 +90,13 @@
         left join factory_address
         on
         product_info.factoryAddress_Id = factory_address.factory_id
-        where product_info.factoryAddress_Id=#{factoryAddressId}
+
+        <if test="#{factoryAddressId}!=null">
+            where product_info.factoryAddress_Id=#{factoryAddressId}
+        </if>
     </select>
 
-    <select id="findByGoodsType">
+    <select id="findByGoodsType" resultMap="base">
         select type_description,picture,product_price,product_id,product_info.factoryAddress_Id,
         product_info.type_id,factory_name
         from product_type  join product_info

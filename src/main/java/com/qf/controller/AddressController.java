@@ -1,5 +1,6 @@
 package com.qf.controller;
 
+import com.qf.constant.SystemConstant;
 import com.qf.dto.AddressDto;
 import com.qf.pojo.Address;
 import com.qf.service.AddressService;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @PROJECT_NAME: brandshop
@@ -27,15 +30,20 @@ public class AddressController {
 
     @ApiOperation("显示地址")
     @GetMapping("api/address/showAddress")
-    public R showAddress(int userId){
-        R r = addressService.showAddress(userId);
-//        System.out.println(r);
-        return r;
+    public R showAddress(HttpServletRequest request){
+
+        String token = request.getHeader(SystemConstant.TOKEN_HEADER);
+        return addressService.showAddress(token);
+
+//        R r = addressService.showAddress(userId);
+////        System.out.println(r);
+//        return r;
 
     }
     @ApiOperation("添加地址")
     @GetMapping("api/address/insertAddress")
     public R insertAddress(AddressDto addressDto){
+
         return addressService.insertAddress(addressDto);
     }
 

@@ -2,8 +2,12 @@ package com.qf.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.qf.config.RedisKeyConfig;
+import com.qf.dao.FactoryAddressDao;
 import com.qf.dao.ProductInfoDao;
+import com.qf.dao.ProductTypeDao;
+import com.qf.pojo.FactoryAddress;
 import com.qf.pojo.ProductInfo;
+import com.qf.pojo.ProductType;
 import com.qf.service.ProductInfoService;
 import com.qf.util.JedisCore;
 import com.qf.util.TokenUtil;
@@ -11,6 +15,7 @@ import com.qf.vo.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -20,6 +25,10 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     private ProductInfoDao productInfoDao;
     @Autowired
     private JedisCore jedisCore;
+    @Autowired
+    private ProductTypeDao typeDao;
+    @Autowired
+    private FactoryAddressDao factoryAddressDao;
 
 
 
@@ -27,7 +36,17 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     @Override
     public R findAllGoods() {
         List<ProductInfo> allGoods = productInfoDao.findAllGoods();
-        return R.ok(allGoods);
+        List<ProductType> allType = typeDao.findAllType();
+        List<FactoryAddress> factoryAddress = factoryAddressDao.findFactoryAddress();
+
+        HashMap<String,Object> map=new HashMap<>();
+        map.put("product",allGoods);
+        map.put("type",allType);
+        map.put("factory",factoryAddress);
+
+
+
+        return R.ok(map);
     }
 
     @Override
@@ -38,6 +57,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         String token = TokenUtil.createProductToken(123456);
         jedisCore.set(RedisKeyConfig.TOKEN_USER+token, JSON.toJSONString(byProductLike),RedisKeyConfig.TOKEN_TIME);
 //        return R.ok(token);
+
 
         return R.ok(byProductLike);
     }
@@ -76,7 +96,11 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Override
     public R findByGoodsType(Integer goodsTypeId) {
+        HashMap<String,Object> map=new HashMap<>();
+        List<ProductType> allType = typeDao.findAllType();
         List<ProductInfo> byGoodsType = productInfoDao.findByGoodsType(goodsTypeId);
-        return R.ok(byGoodsType);
+        map.put("type",allType);
+        map.put("goods",byGoodsType);
+        return R.ok(map);
     }
 }

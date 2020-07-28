@@ -3,13 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qf.dao.AddressDao">
 
-    <resultMap id="AddressResultMap" type="com.qf.dto.AddressDto">
-        <result column="addressee" property="addressee"/>
-        <result column="add_phone" property="addPhone"/>
-        <result column="area" property="area"/>
-        <result column="street" property="street"/>
-        <result column="user_id" property="userId"/>
-     </resultMap>
+
 
     <resultMap id="base" type="com.qf.pojo.Address">
         <id column="address_id" property="addressId"/>
@@ -21,8 +15,8 @@
     </resultMap>
 
     <!-- 显示地址 -->
-    <select id="showAddress" resultMap="AddressResultMap">
-        select addressee,add_phone,area,street from address where user_id=#{userId}
+    <select id="showAddress" resultMap="base">
+        select address_id,addressee,add_phone,area,street from address where user_id=#{userId}
     </select>
 
     <insert id="insertAddress">
