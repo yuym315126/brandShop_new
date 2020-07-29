@@ -1,5 +1,7 @@
 package com.qf.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.qf.config.RedisKeyConfig;
 import com.qf.dao.ProductInfoDao;
 import com.qf.dao.ShoppingCartDao;
 import com.qf.dto.GetUpdateCartMsg;
@@ -7,7 +9,9 @@ import com.qf.dto.ShoppingCartDto;
 import com.qf.dto.UpdateShoppingCartDto;
 import com.qf.pojo.ProductInfo;
 import com.qf.pojo.ShoppingCart;
+import com.qf.pojo.User;
 import com.qf.service.ShoppingCartService;
+import com.qf.util.JedisCore;
 import com.qf.vo.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,31 +24,46 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private ShoppingCartDao shoppingCartDao;
     @Autowired
     private ProductInfoDao productInfoDao;
+    @Autowired
+    private JedisCore jedisCore;
 
     @Override
-    public R insertGoodIntoCart(ShoppingCartDto shoppingCart) {
-        Integer productId = shoppingCart.getProductId();
+    public R insertGoodIntoCart(Integer productId,String token) {
+        System.out.println("service pid:"+productId);
+        System.out.println(jedisCore.checkKey(RedisKeyConfig.TOKEN_USER + token));
 
-        ProductInfo goodById = productInfoDao.findGoodById(productId);
+        if (jedisCore.checkKey(RedisKeyConfig.TOKEN_USER + token)) {
+            User user = JSON.parseObject(jedisCore.get(RedisKeyConfig.TOKEN_USER + token), User.class);
+            ProductInfo goodById = productInfoDao.findGoodById(productId);
 
-        ShoppingCart cart = new ShoppingCart();
+            System.out.println("serviceImpl good:"+goodById);
+            ShoppingCart shoppingCart = new ShoppingCart();
 
-        cart.setColor(shoppingCart.getColor());
-        cart.setCount(shoppingCart.getCount());
-        cart.setPrice(shoppingCart.getCount()*goodById.getProductPrice());
-        cart.setProductImg(goodById.getPicture());
-        cart.setProductName(goodById.getProductName());
-        cart.setSize(shoppingCart.getSize());
-        cart.setUserId(shoppingCart.getUserId());
+            shoppingCart.setColor(goodById.getColor());
+            shoppingCart.setCount(1);
+            shoppingCart.setPrice(goodById.getProductPrice());
+            shoppingCart.setProductImg(goodById.getPicture());
+            shoppingCart.setProductName(goodById.getProductName());
+            shoppingCart.setSize(goodById.getSize());
+            shoppingCart.setUserId(user.getUserId());
+
+            System.out.println("service cart:"+shoppingCart);
+
+            int row = shoppingCartDao.insertGoodIntoCart(shoppingCart);
+            if (row > 0) {
+                return R.ok(null);
+            } else {
+                return R.error("添加购物车失败");
+            }
 
 
-        int row = shoppingCartDao.insertGoodIntoCart(cart);
-        if(row >0){
-            return R.ok(null);
         }else {
-            return R.error("添加购物车失败");
+            return R.error("请先登录");
         }
+
     }
+
+
 
     @Override
     public R updateCountOfCart(GetUpdateCartMsg getUpdateCartMsg) {

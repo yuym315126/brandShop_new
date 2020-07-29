@@ -89,9 +89,15 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Override
     public R findByFactoryAddressId(Integer factoryAddressId) {
-        List<ProductInfo> byFactoryAddressId = productInfoDao.findByFactoryAddressId(factoryAddressId);
+        HashMap<String,Object> map=new HashMap<>();
 
-        return R.ok(byFactoryAddressId);
+        List<ProductInfo> byFactoryAddressId = productInfoDao.findByFactoryAddressId(factoryAddressId);
+        List<ProductType> allType = typeDao.findAllType();
+        List<FactoryAddress> factoryAddress = factoryAddressDao.findFactoryAddress();
+        map.put("product",byFactoryAddressId);
+        map.put("type",allType);
+        map.put("factory",factoryAddress);
+        return R.ok(map);
     }
 
     @Override

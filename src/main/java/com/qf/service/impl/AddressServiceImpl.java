@@ -34,7 +34,6 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public R showAddress(String token) {
 
-
         if (jedisCore.checkKey(RedisKeyConfig.TOKEN_USER + token)) {
             User user = JSON.parseObject(jedisCore.get(RedisKeyConfig.TOKEN_USER + token), User.class);
             List<Address> addresses = addressDao.showAddress(user.getUserId());

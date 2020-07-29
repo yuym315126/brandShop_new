@@ -15,4 +15,7 @@ public interface OrderService {
 
     //订单新增
     R addOrder(OrderDto orderDto, String token);
+
+    //确认订单
+    R checkOrder(Integer productId,String token);
 }

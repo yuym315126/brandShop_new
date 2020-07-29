@@ -34,7 +34,7 @@ public class ProductInfo {
     //面料
     private String material;
     //尺码
-    private Integer size;
+    private String size;
     //长度偏差
     private String length;
     //薄厚质数

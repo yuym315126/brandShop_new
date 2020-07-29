@@ -24,4 +24,5 @@
         <select id="selectOrder" resultMap="UserResultMap">
             select order_num,total_price from t_order where order_id = #{orderId}
         </select>
+
 </mapper>

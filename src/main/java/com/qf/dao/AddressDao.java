@@ -29,4 +29,7 @@ public interface AddressDao {
 
     //根据id查询地址
     Address selectAddressById(Integer addressId);
+
+    //根据用户id查询默认地址
+    Address showDefaultAddress(Integer userId);
 }

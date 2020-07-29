@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ShoppingCartService {
     //添加商品至购物车
-    R insertGoodIntoCart(ShoppingCartDto shoppingCartDto);
+    R insertGoodIntoCart(Integer productId,String token);
 
     //修改购物车商品数量
     R updateCountOfCart(GetUpdateCartMsg getUpdateCartMsg);

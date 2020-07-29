@@ -38,5 +38,11 @@ public class OrderController {
         String token = request.getHeader(SystemConstant.TOKEN_HEADER);
         return orderService.addOrder(orderDto,token);
     }
+    @ApiOperation("确认订单")
+    @GetMapping("api/order/checkOrder")
+    public R checkOrder(Integer productId,HttpServletRequest request){
+        String token = request.getHeader(SystemConstant.TOKEN_HEADER);
+        return orderService.checkOrder(productId,token);
+    }
 
 }

@@ -21,4 +21,5 @@ public class Address {
     private String area;
     private String street;
     private Integer userId;
+    private Integer isDefault;
 }
