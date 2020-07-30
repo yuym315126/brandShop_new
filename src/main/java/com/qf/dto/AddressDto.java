@@ -14,7 +14,7 @@ public class AddressDto {
     private String addPhone;
     private String area;
     private String street;
-    private Integer userId;
+//    private Integer userId;
 
 
 }

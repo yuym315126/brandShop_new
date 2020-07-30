@@ -1,6 +1,7 @@
 package com.qf.service;
 
 import com.qf.dto.AddressDto;
+import com.qf.dto.AddressUpdateDto;
 import com.qf.pojo.Address;
 import com.qf.vo.R;
 
@@ -17,7 +18,7 @@ public interface AddressService {
 
 //    R updateAddress(Address address);
 
-    R updateAddress(Integer addressId , AddressDto addressDto);
+    R updateAddress(AddressUpdateDto addressDto);
 
 
     R deleteAddress(int addressId);

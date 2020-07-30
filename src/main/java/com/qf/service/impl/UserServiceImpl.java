@@ -156,7 +156,7 @@ public class UserServiceImpl implements UserService {
             User userById = userDao.findUserById(user.getUserId());
             return R.ok(userById);
         }
-        return R.error("亲，登录已失效，请先登录");
+        return R.error("未登录");
     }
 
 

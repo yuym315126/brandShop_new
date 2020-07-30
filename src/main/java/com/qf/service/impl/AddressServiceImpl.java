@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.qf.config.RedisKeyConfig;
 import com.qf.dao.AddressDao;
 import com.qf.dto.AddressDto;
+import com.qf.dto.AddressUpdateDto;
 import com.qf.pojo.Address;
 import com.qf.pojo.User;
 import com.qf.service.AddressService;
@@ -79,11 +80,12 @@ public class AddressServiceImpl implements AddressService {
 
     //更新地址的修改
     @Override
-    public R updateAddress(Integer addressId , AddressDto addressDto) {
-        Address address = BeanCopyUtil.copyDto(Address.class, addressDto, addressDto.getClass().getDeclaredFields());
-        address.setAddressId(addressId);
-        Integer integer = addressDao.updateAddress(address);
-        if (integer == 1){
+    public R updateAddress(AddressUpdateDto addressDto) {
+
+        System.out.println("实现类地址更新："+addressDto);
+        Integer integer1 = addressDao.updateAddress(addressDto);
+
+        if (integer1 == 1){
             return R.ok();
         }
         return R.error("更新失败");
@@ -100,15 +102,12 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public R findAddressById(Integer addressId) {
+        System.out.println("地址id："+addressId);
         Address address = addressDao.selectAddressById(addressId);
+        System.out.println("地址："+address);
         if (address  != null && !"".equals(address)){
-            AddressDto addressDto = new AddressDto();
-            addressDto.setAddPhone(address.getAddPhone());
-            addressDto.setAddressee(address.getAddressee());
-            addressDto.setArea(address.getArea());
-            addressDto.setStreet(address.getStreet());
-            System.out.println(addressDto);
-            return R.ok(addressDto);
+            System.out.println(R.ok(address));
+            return R.ok(address);
         }
         return R.error("地址加载失败");
     }

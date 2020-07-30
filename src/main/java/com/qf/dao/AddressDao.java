@@ -1,6 +1,7 @@
 package com.qf.dao;
 
 import com.qf.dto.AddressDto;
+import com.qf.dto.AddressUpdateDto;
 import com.qf.pojo.Address;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,7 @@ public interface AddressDao {
     Integer insertAddress(Address address);
 
     //修改地址
-    Integer updateAddress(Address address);
+    Integer updateAddress(AddressUpdateDto address);
     //Integer updateAddress(Integer addressId);
 
     //删除地址

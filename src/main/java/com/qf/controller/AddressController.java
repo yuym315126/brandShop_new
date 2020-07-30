@@ -2,6 +2,7 @@ package com.qf.controller;
 
 import com.qf.constant.SystemConstant;
 import com.qf.dto.AddressDto;
+import com.qf.dto.AddressUpdateDto;
 import com.qf.pojo.Address;
 import com.qf.service.AddressService;
 import com.qf.vo.R;
@@ -41,6 +42,7 @@ public class AddressController {
     @ApiOperation("添加地址")
     @PostMapping("api/address/insertAddress")
     public R insertAddress(@RequestBody AddressDto addressDto, HttpServletRequest request){
+        System.out.println("添加地址："+addressDto);
         String token = request.getHeader(SystemConstant.TOKEN_HEADER);
         return addressService.insertAddress(addressDto,token);
     }
@@ -53,14 +55,15 @@ public class AddressController {
 
 
     @ApiOperation("更新地址")
-    @PostMapping("api/address/updateAddress/{addressId}")
-    public R updateAddress(@PathVariable Integer addressId ,@RequestBody AddressDto addressDto){
-        return addressService.updateAddress(addressId,addressDto);
+    @PostMapping("api/address/updateAddress")
+    public R updateAddress(@RequestBody AddressUpdateDto addressDto){
+        System.out.println("跟新地址："+addressDto);
+        return addressService.updateAddress(addressDto);
     }
 
     @ApiOperation("地址详情")
-    @GetMapping("api/address/showOneAddress/{addressId}")
-    public R showOneAddress(@PathVariable Integer addressId){
+    @GetMapping("api/address/showOneAddress")
+    public R showOneAddress(Integer addressId){
         return addressService.findAddressById(addressId);
     }
 

@@ -57,7 +57,7 @@ public class UserController {
     }
 
     @ApiOperation("用户详情")
-    @PostMapping("api/user/findUser")
+    @GetMapping("api/user/findUser")
     public R findUser(HttpServletRequest request){
         String token = request.getHeader(SystemConstant.TOKEN_HEADER);
         return userService.findUser(token);

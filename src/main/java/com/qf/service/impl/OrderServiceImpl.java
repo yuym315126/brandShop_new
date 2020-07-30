@@ -57,7 +57,12 @@ public class OrderServiceImpl implements OrderService {
     public R addOrder(OrderDto orderDto, String token) {
         User user = JSON.parseObject(jedisCore.get(RedisKeyConfig.TOKEN_USER + token), User.class);
         if (jedisCore.checkKey(RedisKeyConfig.TOKEN_USER + token)){
-            Order order = BeanCopyUtil.copyDto(Order.class, orderDto, orderDto.getClass().getDeclaredFields());
+
+//            Order order = BeanCopyUtil.copyDto(Order.class, orderDto, orderDto.getClass().getDeclaredFields());
+            Order order = new Order();
+//            order.setUserId(user.getUserId());
+            order.setTotalPrice(orderDto.getTotalPrice());
+            order.setOrderStatus(orderDto.getOrderStatus());
             order.setOrderNum(UUID.randomUUID().toString().replace("-",""));
 
             order.setUserId(user.getUserId());

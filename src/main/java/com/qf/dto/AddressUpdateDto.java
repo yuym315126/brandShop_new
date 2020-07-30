@@ -3,19 +3,19 @@ package com.qf.dto;
 import lombok.Data;
 
 /**
- * @program: demo
- * @description:
- * @author: money
- * @create: 2020-07-23 20:01
+ * @PROJECT_NAME: brandshop
+ * @DESCRIPTION:
+ * @USER: 木子Lee
+ * @DATE: 2020/7/21 19:28
  */
 @Data
-public class OrderDto {
+public class AddressUpdateDto {
+    private Integer addressId;
     private String addressee;
     private String addPhone;
     private String area;
     private String street;
-    private Double totalPrice;
-    private String orderStatus;
 //    private Integer userId;
+
 
 }
