@@ -19,4 +19,6 @@ public class Order {
     private Integer userId;
     //订单详情id
     private String orderItemId;
+    //
+    private Integer productId;
 }

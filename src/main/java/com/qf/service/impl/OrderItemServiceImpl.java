@@ -35,13 +35,17 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public R findOrderItems(Integer orderId) {
         OrderItems orderItems = itemDao.findOrderItems(orderId);
+        System.err.println("orderItems:"+orderItems);
         OrderItemsDto itemsDto = new OrderItemsDto();
 
         Order order = orderDao.selectOrder(orderId);
+        System.err.println("order:"+order);
         itemsDto.setTotalPrice(order.getTotalPrice());
         itemsDto.setOrderNum(order.getOrderNum());
 
         Address address = addressDao.selectAddressById(orderItems.getAddressId());
+        System.err.println("address:"+address);
+
         itemsDto.setAddressee(address.getAddressee());
         itemsDto.setArea(address.getArea());
         itemsDto.setAddPhone(address.getAddPhone());

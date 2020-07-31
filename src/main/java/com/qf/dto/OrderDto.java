@@ -16,6 +16,7 @@ public class OrderDto {
     private String street;
     private Double totalPrice;
     private String orderStatus;
+    private String productId;
 //    private Integer userId;
 
 }

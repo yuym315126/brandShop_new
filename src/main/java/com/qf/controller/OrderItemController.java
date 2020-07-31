@@ -1,5 +1,6 @@
 package com.qf.controller;
 
+import com.qf.constant.SystemConstant;
 import com.qf.dto.AddOrderItemDto;
 import com.qf.service.OrderItemService;
 import com.qf.vo.R;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @program: demo
@@ -25,13 +28,17 @@ public class OrderItemController {
     private OrderItemService orderItemService;
 
     @ApiOperation("订单详细信息")
-    @GetMapping("api/orderitem/showOrderItem/{orderId}")
-    public R showOrderItem(@PathVariable Integer orderId){
+    @GetMapping("api/orderitem/showOrderItem")
+    public R showOrderItem(Integer orderId){
+        System.out.println("订单id:"+orderId);
         return orderItemService.findOrderItems(orderId);
     }
     @ApiOperation("添加订单详情")
     @GetMapping("api/orderitem/addOrderItem")
-    public R addOrderItem(AddOrderItemDto addOrderItemDto){
+    public R addOrderItem(AddOrderItemDto addOrderItemDto, HttpServletRequest request){
+        String token = request.getHeader(SystemConstant.TOKEN_HEADER);
+        System.out.println("token："+token);
+
         return orderItemService.addOrderItem(addOrderItemDto);
     }
 

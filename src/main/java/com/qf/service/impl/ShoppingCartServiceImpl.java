@@ -101,10 +101,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public R findCartByUser(Integer userId) {
-//        System.out.println("id"+userId);
-        List<ShoppingCart> cartByUser = shoppingCartDao.findCartByUser(userId);
-//        System.out.println("========"+cartByUser);
-        return R.ok(cartByUser);
+    public R findCartByUser(String token) {
+        if (jedisCore.checkKey(RedisKeyConfig.TOKEN_USER + token)) {
+            User user = JSON.parseObject(jedisCore.get(RedisKeyConfig.TOKEN_USER + token), User.class);
+
+            List<ShoppingCart> cartByUser = shoppingCartDao.findCartByUser(user.getUserId());
+            return R.ok(cartByUser);
+        }else{
+            return R.error("请先登录");
+
+        }
+
     }
 }

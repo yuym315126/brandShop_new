@@ -18,5 +18,5 @@ public interface ShoppingCartService {
     R deleteGoodFromCart(Integer shoppingCartId);
 
     //查询指定用户的购物车
-    R findCartByUser(Integer userId);
+    R findCartByUser(String token);
 }

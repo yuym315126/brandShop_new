@@ -44,8 +44,11 @@ public class ShoppingCartController {
 
     @ApiOperation("查询指定用户的购物车列表")
     @GetMapping("api/shoppingCart/findCartsFromUser")
-    public R findCartsFromUser(Integer userId){
-        return shoppingCartService.findCartByUser(userId);
+    public R findCartsFromUser(HttpServletRequest request){
+        String token = request.getHeader(SystemConstant.TOKEN_HEADER);
+        System.out.println("token："+token);
+
+        return shoppingCartService.findCartByUser(token);
     }
 
 
